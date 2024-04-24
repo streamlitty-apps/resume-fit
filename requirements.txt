@@ -1,0 +1,4 @@
+openai==1.23.2
+streamlit==1.33.0
+streamlit_option_menu==0.3.12
+pypdf2==3.0.1
