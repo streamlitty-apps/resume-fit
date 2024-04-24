@@ -1,8 +1,7 @@
 import json
-import textwrap
 import streamlit as st
-from PyPDF2 import PdfReader
 from streamlit_option_menu import option_menu
+from helpers import parse_pdf, wrap_text
 from openai_client import get_openai_client, get_openai_response
 
 
@@ -17,17 +16,6 @@ def get_openai_api_key():
         if api_key:
             st.session_state.api_key = api_key
             st.experimental_rerun()
-
-
-def parse_pdf(pdf_file):
-    pdf_reader = PdfReader(pdf_file)
-    pdf_text = ""
-
-    for page_num in range(len(pdf_reader.pages)):
-        page = pdf_reader.pages[page_num]
-        pdf_text += page.extract_text()
-
-    return pdf_text
 
 
 def run_streamlit_app():
@@ -98,12 +86,7 @@ def run_streamlit_app():
                         with col2:
                             st.subheader("Resume Gaps")
                             for skill_gap in response["resume_gaps"]:
-                                wrapped_text = textwrap.fill(
-                                    textwrap.dedent(skill_gap),
-                                    width=35,
-                                    subsequent_indent=" " * 2,
-                                )
-                                st.text("• " + wrapped_text)
+                                st.text(wrap_text(skill_gap))
 
                         col1, col2 = st.columns(2)
                         with col1:
@@ -120,31 +103,16 @@ def run_streamlit_app():
                         with col1:
                             st.subheader("Resume Experience")
                             for skill in response["resume_experience"]:
-                                wrapped_text = textwrap.fill(
-                                    textwrap.dedent(skill),
-                                    width=35,
-                                    subsequent_indent=" " * 2,
-                                )
-                                st.text("• " + wrapped_text)
+                                st.text(wrap_text(skill))
 
                         with col2:
                             st.subheader("Job Requirements")
                             for skill in response["job_requirements"]:
-                                wrapped_text = textwrap.fill(
-                                    textwrap.dedent(skill),
-                                    width=35,
-                                    subsequent_indent=" " * 2,
-                                )
-                                st.text("• " + wrapped_text)
+                                st.text(wrap_text(skill))
 
                         st.subheader("Recommendations")
                         for recommendation in response["recommendations"]:
-                            wrapped_text = textwrap.fill(
-                                textwrap.dedent(recommendation),
-                                width=75,
-                                subsequent_indent=" " * 2,
-                            )
-                            st.text("• " + wrapped_text)
+                            st.text(wrap_text(recommendation, wrap_width=75))
 
                     except Exception as e:
                         st.error(f"Error during response: {e}")
