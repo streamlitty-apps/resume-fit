@@ -3,6 +3,12 @@ Resume Fit
 
 Resume Fit is a tool designed to help users improve their resume based on the job they're applying to. Using OpenAI GPT-3.5, the app generates a breakdown of a a given resume to a given job description.
 
+Hosted App
+------------
+To view our app live, navigate to our streamlit server:
+
+* https://resume-fit.streamlit.app/
+
 Requirements
 ------------
 
