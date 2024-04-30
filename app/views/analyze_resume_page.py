@@ -1,7 +1,7 @@
 import json
 import streamlit as st
 from helpers.helpers import parse_pdf, wrap_text
-from helpers.openai_client import get_openai_client, get_openai_response
+from helpers.openai_client import get_openai_client, compare_resume_to_job_description
 
 
 def analyze_resume_page():
@@ -14,7 +14,7 @@ def analyze_resume_page():
 
     st.header("Step 1: Upload Your Resume")
 
-    resume_file = st.file_uploader("Upload your PDF resume", type=["pdf"])
+    resume_file = st.file_uploader("Upload a PDF version of your resume", type=["pdf"])
 
     resume_text = ""
     if resume_file is not None:
@@ -24,9 +24,11 @@ def analyze_resume_page():
         except Exception as e:
             st.error(f"Error parsing the resume: {e}")
 
-    st.header("Step 2: Enter the Job Description")
+    st.header("Step 2: Upload Your Job Description")
 
-    job_description_file = st.file_uploader("Upload your job description", type=["pdf"])
+    job_description_file = st.file_uploader(
+        "Upload a PDF version of your job description", type=["pdf"]
+    )
 
     job_description_text = ""
     if job_description_file is not None:
@@ -40,7 +42,9 @@ def analyze_resume_page():
     if resume_text and job_description_text:
         with st.spinner("Analyzing Your Resume..."):
             try:
-                result = get_openai_response(client, resume_text, job_description_text)
+                result = compare_resume_to_job_description(
+                    client, resume_text, job_description_text
+                )
 
                 response = json.loads(result)
 

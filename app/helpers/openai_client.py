@@ -44,7 +44,9 @@ def get_openai_client(api_key):
     return OpenAI(api_key=api_key)
 
 
-def get_openai_response(client, resume, job_description, model=DEFAULT_MODEL):
+def compare_resume_to_job_description(
+    client, resume, job_description, model=DEFAULT_MODEL
+):
     """
     Retrieves a response from the OpenAI chat model based on the given text prompt.
 
