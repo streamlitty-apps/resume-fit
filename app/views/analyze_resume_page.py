@@ -1,6 +1,6 @@
 import json
 import streamlit as st
-from helpers.helpers import parse_pdf, wrap_text
+from helpers.file_utils import parse_pdf, wrap_text
 from helpers.openai_client import get_openai_client, compare_resume_to_job_description
 
 
