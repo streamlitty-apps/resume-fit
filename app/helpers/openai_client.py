@@ -4,15 +4,6 @@ from openai import OpenAI
 DEFAULT_MODEL = "gpt-3.5-turbo"
 SYSTEM_PROMPT = "You're an expert in resume analysis with expertise in matching candidates to job requirements."
 
-resume_analysis_schema = {
-    "skills_from_resume": list,
-    "skills_from_job_description": list,
-    "matches": list,
-    "gaps": list,
-    "qualification_percentage": int,
-    "recommendations": list,
-}
-
 
 def validate_openai_api_key(api_key):
     try:
@@ -84,7 +75,7 @@ def get_openai_response(client, resume, job_description, model=DEFAULT_MODEL):
     Compare the resume against the job description, and provide a response that follows the exact structure / format as below:
 
     {{
-    "qualification_match_percentage": MATCH_PERCENTAGE,
+    "qualification_match_percentage": MATCH_PERCENTAGE_NUMBER,
     "resume_gaps": LIST OF GAPS ON RESUME COMPARED TO JOB DESCRIPTION,
     "top_5_resume_keywords": LIST TOP 5 RESUME KEYWORDS,
     "top_5_job_keywords": LIST TOP 5 JOB DESCRIPTION KEYWORDS,
