@@ -5,8 +5,9 @@ from helpers.openai_client import get_openai_client, get_openai_response
 
 
 def analyze_resume_page():
-    st.title("Analyze Resume")
-    st.write("Upload your resume and job description for response.")
+    st.title("Welcome to Resume Fit!")
+    st.write("Let this be your personal assistant for landing the perfect job!")
+    st.info("Upload your resume and job description for analysis")
 
     api_key = st.session_state.api_key
     client = get_openai_client(api_key)

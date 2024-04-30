@@ -1,20 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+from views.initial_page_load import initial_page_load
 from views.analyze_resume_page import analyze_resume_page
 from views.resume_resources_page import resume_resources_page
-
-
-def get_openai_api_key():
-    if "api_key" not in st.session_state:
-        st.session_state.api_key = None
-
-    if not st.session_state.api_key:
-        api_key = st.text_input(
-            "Enter your OpenAI API key to get started:", type="password"
-        )
-        if api_key:
-            st.session_state.api_key = api_key
-            st.rerun()
 
 
 def run_streamlit_app():
@@ -30,13 +18,10 @@ def run_streamlit_app():
         )
 
     if selected == "Analyze Resume":
-        if "api_key" not in st.session_state or not st.session_state.api_key:
-            st.title("Welcome to Resume Fit!")
-            st.info("Your personal assistant for landing the perfect job!")
-            get_openai_api_key()
+        if not st.session_state.get("api_key"):
+            initial_page_load()
         else:
             analyze_resume_page()
-
     elif selected == "Resume Resources":
         resume_resources_page()
 
