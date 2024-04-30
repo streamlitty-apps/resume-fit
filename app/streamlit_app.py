@@ -1,8 +1,8 @@
 import json
 import streamlit as st
 from streamlit_option_menu import option_menu
-from helpers import parse_pdf, wrap_text
-from openai_client import get_openai_client, get_openai_response
+from helpers.helpers import parse_pdf, wrap_text
+from helpers.openai_client import get_openai_client, get_openai_response
 
 
 def get_openai_api_key():
