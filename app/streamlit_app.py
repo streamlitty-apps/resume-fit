@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 from views.analyze_resume_page import analyze_resume_page
+from views.resume_resources_page import resume_resources_page
 
 
 def get_openai_api_key():
@@ -37,8 +38,7 @@ def run_streamlit_app():
             analyze_resume_page()
 
     elif selected == "Resume Resources":
-        st.title("Resume Resources")
-        st.write("Access useful resources for creating a great resume.")
+        resume_resources_page()
 
 
 if __name__ == "__main__":
